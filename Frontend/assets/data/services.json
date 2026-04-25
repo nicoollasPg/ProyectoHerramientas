@@ -1,0 +1,23 @@
+[
+    {
+        "id": "clasico",
+        "name": "Corte Clásico",
+        "description": "Elegante y atemporal, ideal para un look profesional.",
+        "price": 25,
+        "image": "clasico.jpg"
+    },
+    {
+        "id": "fade",
+        "name": "Fade Moderno",
+        "description": "Degradado personalizado para un estilo contemporáneo.",
+        "price": 25,
+        "image": "fade.jpg"
+    },
+    {
+        "id": "barba",
+        "name": "Afeitado y Barba",
+        "description": "Diseño de barba o afeitado tradicional con acabados premium.",
+        "price": 10,
+        "image": "barba.jpg"
+    }
+]
