@@ -99,6 +99,9 @@ app.use('/api', apiLimiter);
 // ==========================================
 const frontendPath = path.join(__dirname, 'frontend');
 app.use(express.static(frontendPath));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
 
 // ==========================================
 // RUTAS API
