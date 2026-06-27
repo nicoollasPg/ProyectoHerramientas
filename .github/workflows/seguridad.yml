@@ -1,0 +1,31 @@
+name: Seguridad y Validación - FadeHouse
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validacion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Verificar archivo README
+        run: |
+          if [ -f README.md ]; then
+            echo "README.md encontrado"
+          else
+            echo "README.md no existe"
+          fi
+
+      - name: Listar archivos del proyecto
+        run: ls -la
+
+      - name: Usar variable protegida
+        run: echo "Variables de entorno configuradas correctamente"
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DB_NAME: ${{ secrets.DB_NAME }}

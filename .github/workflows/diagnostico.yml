@@ -1,0 +1,23 @@
+name: Diagnóstico del Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnostico:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mostrar sistema operativo
+        run: uname -a
+
+      - name: Mostrar carpeta actual
+        run: pwd
+
+      - name: Listar archivos del proyecto
+        run: ls -la
+
+      - name: Mostrar versión de Node.js
+        run: node --version
+
+      - name: Mostrar versión de npm
+        run: npm --version
