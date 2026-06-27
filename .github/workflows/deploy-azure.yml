@@ -12,6 +12,10 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v4
 
+      - name: Copiar frontend al backend
+        run: |
+          cp -r Frontend backend/frontend
+
       - name: Deploy a Azure Web App
         uses: azure/webapps-deploy@v3
         with:
