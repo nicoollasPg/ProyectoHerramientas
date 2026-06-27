@@ -20,7 +20,7 @@ jobs:
       - name: Instalar dependencias
         run: |
           cd backend
-          npm install --production
+          npm install
 
       - name: Deploy a Azure Web App
         uses: azure/webapps-deploy@v3
