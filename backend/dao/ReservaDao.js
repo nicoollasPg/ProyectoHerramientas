@@ -74,6 +74,26 @@ class ReservaDAO {
     const [rows] = await pool.execute(query, [id_usuario]);
     return rows;
   }
+  //correo reservas
+  async obtenerDatosCorreoReserva(idReserva) {
+  const query = `
+    SELECT
+      u.correo,
+      u.nombre_usuario,
+      s.nombre AS servicio,
+      b.nombre_usuario AS barbero,
+      r.fecha_hora
+    FROM reservas r
+    INNER JOIN usuarios u ON r.id_usuario = u.id
+    INNER JOIN usuarios b ON r.id_barbero = b.id
+    INNER JOIN servicios s ON r.id_servicio = s.id
+    WHERE r.id = ?
+  `;
+
+  const [rows] = await pool.execute(query, [idReserva]);
+
+  return rows[0];
+}
 
   // Actualizar estado de una reserva
   async actualizarEstado(id, nuevoEstado) {

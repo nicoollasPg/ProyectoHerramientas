@@ -1,18 +1,17 @@
 const ReservaDAO = require('../dao/ReservaDao');
+const { enviarCorreoReserva } = require('../services/emailService');
 
 const ReservaController = {
   registrar: async (req, res) => {
     try {
       const { id_barbero, id_servicio, fecha_hora } = req.body;
 
-      // Validar campos requeridos
       if (!id_barbero || !id_servicio || !fecha_hora) {
         return res.status(400).json({
           message: 'Faltan datos requeridos: id_barbero, id_servicio, fecha_hora'
         });
       }
 
-      // ✅ VALIDAR DISPONIBILIDAD antes de crear la reserva
       const validacion = await ReservaDAO.validarDisponibilidad(
         id_barbero,
         fecha_hora,
@@ -28,8 +27,29 @@ const ReservaController = {
         });
       }
 
-      // Si la validación pasa, crear la reserva
       const id = await ReservaDAO.crearReserva(req.body);
+
+      console.log('✅ Reserva creada:', id);
+
+      try {
+        const datosCorreo =
+          await ReservaDAO.obtenerDatosCorreoReserva(id);
+
+        console.log('📧 DATOS CORREO:', datosCorreo);
+
+        if (datosCorreo) {
+          console.log('📨 Intentando enviar correo...');
+
+          const resultado = await enviarCorreoReserva(datosCorreo);
+
+          console.log('✅ Resultado Resend:', resultado);
+        } else {
+          console.log('⚠️ No se encontraron datos para enviar correo');
+        }
+
+      } catch (errorCorreo) {
+        console.error('❌ Error enviando correo:', errorCorreo);
+      }
 
       res.status(201).json({
         message: 'Reserva creada exitosamente',
@@ -37,12 +57,16 @@ const ReservaController = {
         disponible: true,
         detalles: validacion.detalles
       });
+
     } catch (err) {
-      console.error('Error en registrar reserva:', err);
-      res.status(500).json({ message: 'Error al crear reserva', error: err.message });
+      console.error('❌ Error en registrar reserva:', err);
+
+      res.status(500).json({
+        message: 'Error al crear reserva',
+        error: err.message
+      });
     }
   },
-
 
   obtenerTodas: async (req, res) => {
     try {
@@ -59,8 +83,13 @@ const ReservaController = {
       const { id } = req.params;
       const { estado } = req.body;
 
-      // Validar que el estado sea válido
-      const estadosValidos = ['pendiente', 'confirmada', 'cancelada', 'completada'];
+      const estadosValidos = [
+        'pendiente',
+        'confirmada',
+        'cancelada',
+        'completada'
+      ];
+
       if (!estado || !estadosValidos.includes(estado)) {
         return res.status(400).json({
           message: 'Estado inválido. Debe ser: pendiente, confirmada, cancelada o completada'
@@ -74,9 +103,12 @@ const ReservaController = {
       } else {
         res.status(404).json({ message: 'Reserva no encontrada' });
       }
+
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Error al actualizar estado de la reserva' });
+      res.status(500).json({
+        message: 'Error al actualizar estado de la reserva'
+      });
     }
   },
 
@@ -89,12 +121,14 @@ const ReservaController = {
         reservas_actualizadas: resultado.actualizadas,
         detalles: resultado.detalles
       });
+
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Error al actualizar reservas pasadas' });
+      res.status(500).json({
+        message: 'Error al actualizar reservas pasadas'
+      });
     }
   }
-
 };
 
 module.exports = ReservaController;
