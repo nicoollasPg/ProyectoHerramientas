@@ -1,0 +1,27 @@
+name: Notificación de Despliegue - FadeHouse
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Verificar rama
+        run: echo "Cambios detectados en la rama main del proyecto FadeHouse"
+
+      - name: Mostrar información del commit
+        run: |
+          echo "Commit: ${{ github.sha }}"
+          echo "Autor: ${{ github.actor }}"
+          echo "Mensaje: ${{ github.event.head_commit.message }}"
+
+      - name: Simular notificación de despliegue
+        run: |
+          echo "Notificación enviada al equipo FadeHouse"
+          echo "El sistema está listo para ser desplegado"
+          echo "Fecha: $(date)"

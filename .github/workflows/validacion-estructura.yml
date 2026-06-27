@@ -1,0 +1,61 @@
+name: Validación de Estructura - FadeHouse
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  validar-estructura:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Verificar carpeta backend
+        run: |
+          if [ -d "backend" ]; then
+            echo "Carpeta backend encontrada"
+          else
+            echo "Carpeta backend no encontrada"
+            exit 1
+          fi
+
+      - name: Verificar server.js
+        run: |
+          if [ -f "backend/server.js" ]; then
+            echo "server.js encontrado"
+          else
+            echo "server.js no encontrado"
+            exit 1
+          fi
+
+      - name: Verificar package.json
+        run: |
+          if [ -f "backend/package.json" ]; then
+            echo "package.json encontrado"
+          else
+            echo "package.json no encontrado"
+            exit 1
+          fi
+
+      - name: Verificar carpeta Frontend
+        run: |
+          if [ -d "Frontend" ]; then
+            echo "Carpeta Frontend encontrada"
+          else
+            echo "Carpeta Frontend no encontrada"
+            exit 1
+          fi
+
+      - name: Verificar schema.sql
+        run: |
+          if [ -f "database/schema.sql" ]; then
+            echo "schema.sql encontrado"
+          else
+            echo "schema.sql no encontrado"
+            exit 1
+          fi
+
+      - name: Resumen de validación
+        run: echo "Estructura del proyecto FadeHouse validada correctamente"
