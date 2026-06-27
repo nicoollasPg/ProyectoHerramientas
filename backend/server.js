@@ -97,7 +97,7 @@ app.use('/api', apiLimiter);
 // ==========================================
 // SERVIR FRONTEND
 // ==========================================
-const frontendPath = path.join(__dirname, '../frontend');
+const frontendPath = path.join(__dirname, 'frontend');
 app.use(express.static(frontendPath));
 
 // ==========================================
