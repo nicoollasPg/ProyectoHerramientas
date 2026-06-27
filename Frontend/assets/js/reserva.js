@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Cargar barberos dinámicamente
   async function cargarBarberos() {
     try {
-      const res = await fetch('http://localhost:3001/api/barberos');
+      const res = await fetch('https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net/api/barberos');
       if (!res.ok) {
         console.error('Error al cargar barberos');
         return;
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Enviar la reserva al backend
-      const res = await fetch('http://localhost:3001/api/reservas', {
+      const res = await fetch('https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net/api/reservas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

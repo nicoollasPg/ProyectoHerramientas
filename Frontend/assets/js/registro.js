@@ -15,7 +15,7 @@ document.getElementById('formRegistro').addEventListener('submit', async (e) => 
   }
 
   try {
-    const res = await fetch('http://localhost:3001/api/registro', {
+    const res = await fetch('https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net/api/registro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

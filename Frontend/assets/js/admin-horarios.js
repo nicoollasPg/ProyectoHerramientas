@@ -1,5 +1,5 @@
 // frontend/assets/js/admin-horarios.js
-const API_URL = 'http://localhost:3001/api';
+const API_URL = 'https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net/api';
 let barberoSeleccionado = null;
 let horarios = [];
 

@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mensaje.style.color = "gray";
 
     try {
-      const res = await fetch("http://localhost:3001/api/login", {
+      const res = await fetch("https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ correo, password }),
