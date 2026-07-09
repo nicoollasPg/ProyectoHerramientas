@@ -154,12 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const pagoData = await pagoRes.json();
 
     if (pagoData.init_point) {
-      document.getElementById('btnPagar').href = pagoData.init_point;
       document.getElementById('pagoContainer').style.display = 'block';
-      document.getElementById('btnPagar').addEventListener('click', () => {
-        localStorage.setItem('pago_iniciado', 'true');
-      });
       showAlert('success', 'Reserva Confirmada', 'Tu reserva ha sido registrada. Procede con el pago.');
+      
+      document.getElementById('btnPagar').addEventListener('click', (e) => {
+        e.preventDefault();
+        window.open(pagoData.init_point, '_blank');
+        document.getElementById('pagoContainer').innerHTML = 
+          '<p class="text-center text-info fw-bold">💳 Pago en proceso en otra pestaña. Una vez completado, regresa aquí.</p>';
+      });
     }
       reservaForm.reset();
       } else {
