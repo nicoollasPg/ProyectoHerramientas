@@ -164,13 +164,12 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     window.open(pagoData.init_point, '_blank');
     
-    window.addEventListener('focus', () => {
-      document.getElementById('pagoContainer').style.display = 'none';
-      document.getElementById('pagoContainer').innerHTML = 
-        `<button id="btnPagar" class="btn btn-warning w-100">
-          <i class="fas fa-credit-card"></i> Pagar con MercadoPago
-        </button>`;
-    }, { once: true });
+    document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    document.getElementById('pagoContainer').style.display = 'none';
+    document.getElementById('pagoContainer').innerHTML = '';
+  }
+}, { once: true });
   });
     }
       reservaForm.reset();
