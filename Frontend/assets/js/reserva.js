@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   document.getElementById('btnPagar').addEventListener('click', (e) => {
     e.preventDefault();
+    document.getElementById('pagoContainer').style.display = 'none';
     window.open(pagoData.init_point, '_blank');
     
     document.addEventListener('visibilitychange', () => {
