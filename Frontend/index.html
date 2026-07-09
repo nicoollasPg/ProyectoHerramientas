@@ -191,16 +191,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script>
-        window.addEventListener('load', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('pago') === 'exitoso') {
-        Swal.fire({
-            icon: 'success',
-            title: '¡Pago Exitoso!',
-            text: 'Tu reserva ha sido confirmada. ¡Nos vemos pronto!',
-            confirmButtonColor: '#198754'
-        });
-    }
+     window.addEventListener('load', function() {
+    setTimeout(function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('pago') === 'exitoso') {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Pago Exitoso!',
+                text: 'Tu reserva ha sido confirmada. ¡Nos vemos pronto!',
+                confirmButtonColor: '#198754'
+            });
+        }
+    }, 500);
 });
 </script>
 </body>
