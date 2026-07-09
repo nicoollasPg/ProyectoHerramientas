@@ -22,9 +22,9 @@ router.post('/crear', async (req, res) => {
                     }
                 ],
                 back_urls: {
-                    success: `${process.env.APP_URL || 'https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net'}/reserva.html?pago=exitoso`,
-                    failure: `${process.env.APP_URL || 'https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net'}/reserva.html?pago=fallido`,
-                    pending: `${process.env.APP_URL || 'https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net'}/reserva.html?pago=pendiente`
+                    success: `https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net/index.html?pago=exitoso`,
+                    failure: `https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net/reserva.html?pago=fallido`,
+                    pending: `https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net/reserva.html?pago=pendiente`
                 },
                 auto_return: 'approved',
                 external_reference: String(reserva_id)

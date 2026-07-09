@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  // Ocultar botón si ya se inició un pago
+  if (localStorage.getItem('pago_iniciado') === 'true') {
+    localStorage.removeItem('pago_iniciado');
+    document.getElementById('pagoContainer').style.display = 'none';
+  }
+
   // Cargar barberos dinámicamente
   async function cargarBarberos() {
     try {
@@ -142,6 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pagoData.init_point) {
       document.getElementById('btnPagar').href = pagoData.init_point;
       document.getElementById('pagoContainer').style.display = 'block';
+      document.getElementById('btnPagar').addEventListener('click', () => {
+        localStorage.setItem('pago_iniciado', 'true');
+      });
       showAlert('success', 'Reserva Confirmada', 'Tu reserva ha sido registrada. Procede con el pago.');
     }
       reservaForm.reset();
