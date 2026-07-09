@@ -158,13 +158,19 @@ document.addEventListener('DOMContentLoaded', () => {
   showAlert('success', 'Reserva Confirmada', 'Tu reserva ha sido registrada. Procede con el pago.');
   
   const btnPagar = document.getElementById('btnPagar');
-  btnPagar.replaceWith(btnPagar.cloneNode(true)); // Elimina eventos anteriores
+  btnPagar.replaceWith(btnPagar.cloneNode(true));
   
   document.getElementById('btnPagar').addEventListener('click', (e) => {
     e.preventDefault();
-    document.getElementById('pagoContainer').innerHTML = 
-      '<p class="text-center text-success fw-bold">✅ Pago iniciado. Completa el pago en la otra pestaña.</p>';
     window.open(pagoData.init_point, '_blank');
+    
+    window.addEventListener('focus', () => {
+      document.getElementById('pagoContainer').style.display = 'none';
+      document.getElementById('pagoContainer').innerHTML = 
+        `<button id="btnPagar" class="btn btn-warning w-100">
+          <i class="fas fa-credit-card"></i> Pagar con MercadoPago
+        </button>`;
+    }, { once: true });
   });
     }
       reservaForm.reset();
