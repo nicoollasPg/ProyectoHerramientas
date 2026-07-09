@@ -121,8 +121,30 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await res.json();
 
       if (res.ok) {
-        showAlert('success', 'Reserva Confirmada', 'Tu reserva ha sido registrada con éxito');
-        reservaForm.reset();
+        const reservaId = data.id || data.reserva_id || 1;
+  
+  // Obtener precio del servicio seleccionado
+    const servicioSelect = document.getElementById('service');
+    const servicioTexto = servicioSelect.options[servicioSelect.selectedIndex].text;
+    const precioMatch = servicioTexto.match(/S\/\.(\d+)/);
+    const precio = precioMatch ? parseFloat(precioMatch[1]) : 25;
+    const nombreServicio = servicioTexto.split(' - ')[0];
+
+  // Crear pago en MercadoPago
+    const pagoRes = await fetch('https://fadehouse-backend-e7fuchc7c8f9hncv.chilecentral-01.azurewebsites.net/api/pagos/crear', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ servicio: nombreServicio, precio, reserva_id: reservaId })
+      });
+
+    const pagoData = await pagoRes.json();
+
+    if (pagoData.init_point) {
+      document.getElementById('btnPagar').href = pagoData.init_point;
+      document.getElementById('pagoContainer').style.display = 'block';
+      showAlert('success', 'Reserva Confirmada', 'Tu reserva ha sido registrada. Procede con el pago.');
+    }
+      reservaForm.reset();
       } else {
         showAlert('error', 'Error en Reserva', data.message || 'Error al registrar la reserva');
       }

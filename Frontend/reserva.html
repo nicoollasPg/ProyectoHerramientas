@@ -59,7 +59,14 @@
                 <input type="time" class="form-control" id="time" required>
               </div>
 
-              <button type="submit" class="btn btn-secondary w-100 py-2">Confirmar Reserva</button>
+              <button type="submit" class="btn btn-secondary w-100 py-2 mb-2">Confirmar Reserva</button>
+              <div id="pagoContainer" style="display:none;">
+              <hr>
+              <p class="text-center text-success fw-bold">✅ Reserva confirmada. Procede con el pago:</p>
+              <a id="btnPagar" href="#" target="_blank" class="btn btn-warning w-100 py-2">
+                💳 Pagar con MercadoPago
+              </a>
+              </div>
             </form>
           </div>
         </div>
