@@ -1,4 +1,6 @@
 // backend/server.js
+const appInsights = require('applicationinsights');
+appInsights.setup().start();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
