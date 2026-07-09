@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('pagoContainer').style.display = 'none';
   }
 
+  // Escuchar cambios en localStorage desde otra pestaña
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'pago_iniciado' && e.newValue === 'true') {
+      document.getElementById('pagoContainer').style.display = 'none';
+      localStorage.removeItem('pago_iniciado');
+    }
+  });
+
   // Cargar barberos dinámicamente
   async function cargarBarberos() {
     try {
