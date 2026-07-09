@@ -19,6 +19,7 @@ const usuarioRoutes = require('./routes/usuarioRoutes');
 const reservaRoutes = require('./routes/reservaRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const horarioRoutes = require('./routes/horarioRoutes');
+const pagoRoutes = require('./routes/pagoRoutes');
 
 
 const app = express();
@@ -126,7 +127,7 @@ app.use('/api', usuarioRoutes);
 app.use('/api', reservaRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api', horarioRoutes);
-
+app.use('/api/pagos', pagoRoutes);
 
 // ==========================================
 // MANEJO DE ERRORES
